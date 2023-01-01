@@ -1,48 +1,81 @@
-// Login form validation
-document.getElementById('login-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-  
-    // Get the input fields
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
-  
-    // Check that the fields are not empty
-    if (username === '' || password === '') {
-      alert('Username and password are required');
-      return;
+const loginForm = document.getElementById('login-form');
+const registerForm = document.getElementById('register-form');
+const showRegisterFormButton = document.getElementById('show-register-form');
+const showLoginFormButton = document.getElementById('show-login-form');
+
+showRegisterFormButton.addEventListener('click', () => {
+  loginForm.classList.add('hidden');
+  registerForm.classList.remove('hidden');
+});
+
+showLoginFormButton.addEventListener('click', () => {
+  loginForm.classList.remove('hidden');
+  registerForm.classList.add('hidden');
+});
+
+loginForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  // Add code to validate login credentials here
+  // If login credentials are valid, redirect to dashboard page
+
+  // Check if form is valid
+  if (loginForm.checkValidity()) {
+    // Form is valid, get email and password
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // Validate login credentials
+    if (validateCredentials(email, password)) {
+      // Login credentials are valid, redirect to dashboard page
+      location.replace('/src/dashboard.html');
+    } else {
+      // Login credentials are invalid, show error message
+      const errorMessage = document.getElementById('error-message');
+      errorMessage.innerHTML = 'Invalid email or password';
+      errorMessage.style.display = 'block';
     }
-  
-    // If the fields are not empty, proceed with the login process
-    // (e.g. send an AJAX request to the server to authenticate the user)
-  });
-  
-  // Registration form validation
-  document.getElementById('registration-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-  
-    // Get the input fields
-    var username = document.getElementById('username').value;
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-  
-    // Check that the fields are not empty
-    if (username === '' || email === '' || password === '') {
-      alert('Username, email, and password are required');
-      return;
-    }
-  
-    // Check that the email is in a valid format
-    if (!validateEmail(email)) {
-      alert('Invalid email');
-      return;
-    }
-  
-    // If the fields are not empty and the email is valid, proceed with the registration process
-    // (e.g. send an AJAX request to the server to register the user)
-  });
-  
-  function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+  } else {
+    // Form is invalid, show error messages
+    loginForm.reportValidity();
   }
-  
+});
+
+
+const emailInput = document.getElementById('email');
+
+emailInput.addEventListener('blur', () => {
+  // Check if email is valid
+  if (emailInput.checkValidity()) {
+    // Email is valid, remove error message
+    emailInput.classList.remove('error');
+  } else {
+    // Email is invalid, show error message
+    emailInput.classList.add('error');
+    emailInput.reportValidity();
+  }
+});
+
+
+function validateCredentials(email, password) {
+  // Connect to database
+  $conn = new mysqli('localhost', 'user', 'password', 'database');
+
+  // Check if email exists in database
+  $query = "SELECT * FROM users WHERE email = '$email'";
+  $result = mysqli_query($conn, $query);
+  $user = mysqli_fetch_assoc($result);
+
+  // If email exists, check if password is correct
+  if ($user) {
+    if (password_verify($password, $user['password'])) {
+      // Login credentials are valid
+      return true;
+    } else {
+      // Password is incorrect
+      return false;
+    }
+  } else {
+    // Email does not exist
+    return false;
+  }
+}
