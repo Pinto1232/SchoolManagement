@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "css-loader": "^6.7.3",
+    "mysqli": "^3.1.4",
     "style-loader": "^3.3.1",
     "tailwindcss": "^3.2.4"
   }

@@ -1,62 +1,182 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>My Dashboard</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  </head>
-  <body class="bg-gray-100">
 
-    <header class="bg-black text-white py-4 sm:py-6 lg:py-8">
-        <nav>
-          <!-- Top navigation bar -->
-          <ul class="flex items-center justify-between px-4 sm:px-6 lg:px-8">
-            <li><a href="#" class="font-bold text-xl sm:text-2xl lg:text-3xl transition-colors-500 duration-500 hover:text-white focus:text-white active:text-white">My Dashboard</a></li>
-            <li class="text-base font-bold sm:text-lg lg:text-xl"><a href="#" class="transition-colors-500 duration-500 hover:text-white focus:text-white active:text-white">Home</a></li>
-            <li class="text-base font-bold sm:text-lg lg:text-xl"><a href="#" class="transition-colors-500 duration-500 hover:text-white focus:text-white active:text-white">Reports</a></li>
-            <li class="text-base font-bold sm:text-lg lg:text-xl"><a href="#" class="transition-colors-500 duration-500 hover:text-white focus:text-white active:text-white">Settings</a></li>
-          </ul>
-        </nav>
-      </header>
-      
+<head>
+    <meta charset="utf-8" />
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Change the background color of the header on hover */
+        nav:hover {
+            background-color: #f8fafc;
+        }
 
-    <main class="grid grid-cols-12 gap-4">
-        <aside class="bg-white shadow-md rounded-md p-4 sm:p-6 lg:p-8">
-            <!-- Side menu -->
-            <nav>
-              <ul class="text-base font-bold">
-                <li><a href="#" class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 ease-in-out">Dashboard</a></li>
-                <li><a href="#" class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 ease-in-out">Users</a></li>
-                <li><a href="#" class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 ease-in-out">Orders</a></li>
-                <li><a href="#" class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 ease-in-out">Products</a></li>
-              </ul>
-            </nav>
-          </aside>
-          
-      <section class="col-span-9 bg-white shadow-md rounded-md p-4 sm:p-6 lg:p-8">
-        <!-- Main content -->
-        <div class="panel">
-          <!-- Panel 1 -->
-          <h2 class="text-xl font-bold sm:text-2xl lg:text-3xl">Panel 1</h2>
-          <p class="text-base sm:text-lg lg:text-xl">Content goes here</p>
-          <img src="image1.jpg" alt="Image 1" class="w-full rounded-md transition-shadow-500 duration-500 hover:shadow-lg focus:shadow-lg active:shadow-lg" />
+        /* Add a hover effect to the dropdown menu */
+        .relative:hover>ul {
+            display: block;
+        }
+
+        /* Style the dropdown menu */
+        ul {
+            display: none;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            display: block;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* Add a hover effect to the menu items */
+        li:hover {
+            background-color: #eee;
+        }
+
+        /* Change the text color of the active menu item */
+        li.active {
+            color: #fff;
+        }
+
+        /* Style the active menu item */
+        li.active a {
+            background-color: #333;
+        }
+
+        /* Add a border to the bottom of the active menu item */
+        li.active a:after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 h-screen font-sans">
+    <!-- Header -->
+    <nav class="bg-white shadow-md fixed z-10 top-0 left-0 w-full h-16">
+        <div class="container mx-auto h-full flex items-center justify-between px-4">
+            <div class="text-lg font-semibold text-gray-800">
+                Admin Dashboard
+            </div>
+            <div class="flex items-center">
+                <!-- User dropdown -->
+                <div class="relative text-gray-600">
+                    <button class="flex items-center focus:outline-none">
+                        <span>John Doe</span>
+                        <svg class="h-4 w-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-chevron-down">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <ul class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-lg z-40">
+                        <li>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Account Settings</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="panel">
-          <!-- Panel 2 -->
-          <h2 class="text-xl font-bold sm:text-2xl lg:text-3xl">Panel 2</h2>
-          <p class="text-base sm:text-lg lg:text-xl">Content goes here</p>
-          <img src="image2.jpg" alt="Image 2" class="w-full rounded-md transition-shadow-500 duration-500 hover:shadow-lg focus:shadow-lg active:shadow-lg" />
+    </nav>
+    <!-- Main content -->
+    <div class="container mx-auto px-4 mt-16">
+        <!-- Sidebar -->
+        <div class="flex flex-col lg:flex-row lg:w-1/5 xl:w-1/6">
+            <div class="relative lg:flex-shrink-0 lg:w-full">
+                <div class="sticky top-0 pt-8 pb-4 bg-white shadow-md z-10">
+                    <div class="px-6">
+                        <a href="#"
+                            class="block py-2 font-medium text-gray-800 hover:text-gray-700 focus:outline-none focus:text-gray-700">Dashboard</a>
+                        <a href="#"
+                            class="block py-2 font-medium text-gray-800 hover:text-gray-700 focus:outline-none focus:text-gray-700">Users</a>
+                        <a href="#"
+                            class="block py-2 font-medium text-gray-800 hover:text-gray-700 focus:outline-none focus:text-gray-700">Settings</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="panel">
-          <!-- Panel 3 -->
-          <h2 class="text-xl font-bold sm:text-2xl lg:text-3xl">Panel 3</h2>
-          <p class="text-base sm:text-lg lg:text-xl">Content goes here</p>
-          <img src="image3.jpg" alt="Image 3" class="w-full rounded-md transition-shadow-500 duration-500 hover:shadow-lg focus:shadow-lg active:shadow-lg" />
+        <!-- Main area -->
+        <div class="lg:ml-64 xl:ml-72">
+            <!-- Page title -->
+            <div class="flex items-center px-4 py-4 bg-gray-200 rounded-md shadow-md">
+                <h1 class="text-2xl font-semibold text-gray-800">Dashboard</h1>
+            </div>
+            <!-- Page content -->
+            <div class="px-4 py-8 bg-white rounded-md shadow-md">
+                <div class="flex flex-col lg:flex-row">
+                    <!-- User statistics -->
+                    <div class="w-full lg:w-1/3 px-4 py-4">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">User Statistics</h2>
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 rounded-full bg-green-500 mr-4"></div>
+                            <div class="text-gray-700">Active Users</div>
+                            <div class="ml-auto font-bold text-gray-800">100</div>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 rounded-full bg-orange-500 mr-4"></div>
+                            <div class="text-gray-700">Inactive Users</div>
+                            <div class="ml-auto font-bold text-gray-800">50</div>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 rounded-full bg-red-500 mr-4"></div>
+                            <div class="text-gray-700">Banned Users</div>
+                            <div class="ml-auto font-bold text-gray-800">10</div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/3 px-4 py-4">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Server Statistics</h2>
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 rounded-full bg-green-500 mr-4"></div>
+                            <div class="text-gray-700">Online</div>
+                            <div class="ml-auto font-bold text-gray-800">4</div>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 rounded-full bg-red-500 mr-4"></div>
+                            <div class="text-gray-700">Offline</div>
+                            <div class="ml-auto font-bold text-gray-800">1</div>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 rounded-full bg-yellow-500 mr-4"></div>
+                            <div class="text-gray-700">Maintenance</div>
+                            <div class="ml-auto font-bold text-gray-800">2</div>
+                        </div>
+                    </div>
+                    <!-- Sales statistics -->
+                    <div class="w-full lg:w-1/3 px-4 py-4">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Sales Statistics</h2>
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 rounded-full bg-blue-500 mr-4"></div>
+                            <div class="text-gray-700">Total Sales</div>
+                            <div class="ml-auto font-bold text-gray-800">$5,000</div>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 rounded-full bg-teal-500 mr-4"></div>
+                            <div class="text-gray-700">Average Sale</div>
+                            <div class="ml-auto font-bold text-gray-800">$100</div>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 rounded-full bg-purple-500 mr-4"></div>
+                            <div class="text-gray-700">Top Sale</div>
+                            <div class="ml-auto font-bold text-gray-800">$250</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </section>
-    </main>
-    <footer class="bg-primary-500 text-white py-4 sm:py-6 lg:py-8">
-      <!-- Footer -->
-      <p class="text-center text-base font-bold">Copyright &copy; 2021 My Dashboard</p>
-    </footer>
-  </body>
+    </div>
+</body>
+
 </html>
-

@@ -1,7 +1,10 @@
+const  mysqli =  './dbConnection';
 const loginForm = document.getElementById('login-form');
 const registerForm = document.getElementById('register-form');
 const showRegisterFormButton = document.getElementById('show-register-form');
 const showLoginFormButton = document.getElementById('show-login-form');
+
+
 
 showRegisterFormButton.addEventListener('click', () => {
   loginForm.classList.add('hidden');
@@ -59,6 +62,7 @@ emailInput.addEventListener('blur', () => {
 function validateCredentials(email, password) {
   // Connect to database
   $conn = new mysqli('localhost', 'user', 'password', 'database');
+  console.log($conn);
 
   // Check if email exists in database
   $query = "SELECT * FROM users WHERE email = '$email'";
